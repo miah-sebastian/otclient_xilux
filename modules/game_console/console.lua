@@ -80,7 +80,12 @@ SpeakTypesSettings = {
     rvrContinue = {
         speakType = MessageModes.RVRContinue,
         color = '#FFFF00'
-    }
+    },
+    potion = {
+        speakType = MessageModes.Potion,
+        color = '#FFFF00',
+		hideInConsole = true
+    },
 }
 
 SpeakTypes = {
@@ -102,6 +107,7 @@ SpeakTypes = {
     [MessageModes.RVRContinue] = SpeakTypesSettings.rvrContinue,
     [MessageModes.RVRAnswer] = SpeakTypesSettings.rvrAnswerFrom,
     [MessageModes.NpcFromStartBlock] = SpeakTypesSettings.privateNpcToPlayer,
+	[MessageModes.Potion] = SpeakTypesSettings.potion,
 
     -- ignored types
     [MessageModes.Spell] = SpeakTypesSettings.none,

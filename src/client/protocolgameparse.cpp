@@ -1793,6 +1793,7 @@ void ProtocolGame::parseTalk(const InputMessagePtr& msg)
         case Otc::MessageBarkLoud:
         case Otc::MessageSpell:
         case Otc::MessageNpcFromStartBlock:
+        case Otc::MessagePotion:
             pos = getPosition(msg);
             break;
         case Otc::MessageChannel:
