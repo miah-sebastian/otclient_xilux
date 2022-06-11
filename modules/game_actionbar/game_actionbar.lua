@@ -736,7 +736,7 @@ function onSpellGroupCooldown(groupId, duration)
         if k.words then
             spell, profile, spellName = Spells.getSpellByWords(k.words)
         else
-            if k.itemId and k.itemId > 0 then spell, profile, spellName = Spells.getSpellByClientId(k.itemId) end
+            if k.itemId and k.itemId > 0 then spell, profile, spellName = Spells.getSpellByIcon(k.itemId) end
         end
         if spell then
             if table.contains(spell.group, groupId) then
