@@ -34,7 +34,7 @@ void DrawPool::init() { createPools(); }
 void DrawPool::terminate()
 {
     m_currentPool = nullptr;
-    for (int8 i = -1; ++i <= static_cast<uint8_t>(PoolType::UNKNOW);) {
+    for (int_fast8_t i = -1; ++i <= static_cast<uint8_t>(PoolType::UNKNOW);) {
         delete m_pools[i];
     }
 }
@@ -251,7 +251,7 @@ void DrawPool::addBoundingRect(const Rect& dest, const Color color, int innerLin
     const Pool::DrawMethod method{
         .type = Pool::DrawMethodType::BOUNDING_RECT,
         .rects = std::make_pair(dest, Rect()),
-        .intValue = static_cast<uint16>(innerLineWidth)
+        .intValue = static_cast<uint16_t>(innerLineWidth)
     };
 
     add(color, nullptr, method);
@@ -264,14 +264,17 @@ void DrawPool::addAction(std::function<void()> action)
 
 void DrawPool::createPools()
 {
-    for (int8 i = -1; ++i <= static_cast<uint8_t>(PoolType::UNKNOW);) {
+    for (int8_t i = -1; ++i <= static_cast<uint8_t>(PoolType::UNKNOW);) {
         const auto type = static_cast<PoolType>(i);
         Pool* pool;
         if (type == PoolType::MAP || type == PoolType::LIGHT || type == PoolType::FOREGROUND) {
             const auto& frameBuffer = g_framebuffers.createFrameBuffer(true);
 
             if (type == PoolType::MAP) frameBuffer->disableBlend();
-            else if (type == PoolType::LIGHT) frameBuffer->setCompositionMode(Painter::CompositionMode_Light);
+            else if (type == PoolType::LIGHT) {
+                pool->m_forceGrouping = true;
+                frameBuffer->setCompositionMode(Painter::CompositionMode_Light);
+            }
 
             pool = new PoolFramed{ frameBuffer };
         } else {
