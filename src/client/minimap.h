@@ -65,6 +65,9 @@ public:
     bool wasSeen() { return m_wasSeen; }
 private:
     TexturePtr m_texture;
+    ImagePtr m_image;
+
+    Size m_size{ MMBLOCK_SIZE, MMBLOCK_SIZE };
 
     std::array<MinimapTile, MMBLOCK_SIZE* MMBLOCK_SIZE> m_tiles;
 
@@ -93,10 +96,10 @@ public:
     const MinimapTile& getTile(const Position& pos);
     std::pair<MinimapBlock_ptr, MinimapTile> threadGetTile(const Position& pos);
 
-    bool loadImage(const std::string_view fileName, const Position& topLeft, float colorFactor);
-    void saveImage(const std::string_view fileName, const Rect& mapRect);
-    bool loadOtmm(const std::string_view fileName);
-    void saveOtmm(const std::string_view fileName);
+    bool loadImage(const std::string& fileName, const Position& topLeft, float colorFactor);
+    void saveImage(const std::string& fileName, const Rect& mapRect);
+    bool loadOtmm(const std::string& fileName);
+    void saveOtmm(const std::string& fileName);
 
 private:
     Rect calcMapRect(const Rect& screenRect, const Position& mapCenter, float scale);
@@ -124,7 +127,7 @@ private:
         };
     }
     uint getBlockIndex(const Position& pos) { return ((pos.y / MMBLOCK_SIZE) * (65536 / MMBLOCK_SIZE)) + (pos.x / MMBLOCK_SIZE); }
-    std::unordered_map<uint, MinimapBlock_ptr> m_tileBlocks[MAX_Z + 1];
+    stdext::unordered_map<uint, MinimapBlock_ptr> m_tileBlocks[MAX_Z + 1];
     std::mutex m_lock;
 };
 

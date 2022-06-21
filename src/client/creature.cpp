@@ -156,7 +156,7 @@ void Creature::internalDrawOutfit(Point dest, float scaleFactor, bool animateWal
             }
 
             if (m_drawOutfitColor && isNotBlank && getLayers() > 1) {
-                g_drawPool.setCompositionMode(Painter::CompositionMode_Multiply);
+                g_drawPool.setCompositionMode(CompositionMode::MULTIPLY);
                 datType->draw(dest, scaleFactor, SpriteMaskYellow, xPattern, yPattern, zPattern, animationPhase, textureType, m_outfit.getHeadColor());
                 datType->draw(dest, scaleFactor, SpriteMaskRed, xPattern, yPattern, zPattern, animationPhase, textureType, m_outfit.getBodyColor());
                 datType->draw(dest, scaleFactor, SpriteMaskGreen, xPattern, yPattern, zPattern, animationPhase, textureType, m_outfit.getLegsColor());
@@ -198,8 +198,8 @@ void Creature::drawOutfit(const Rect& destRect, bool resize, const Color color)
 {
     int frameSize;
     if (!resize)
-        frameSize = m_drawCache.frameSizeNotResized;
-    else if ((frameSize = m_drawCache.exactSize) == 0)
+        frameSize = m_sizeCache.frameSizeNotResized;
+    else if ((frameSize = m_sizeCache.exactSize) == 0)
         return;
 
     const float scaleFactor = destRect.width() / static_cast<float>(frameSize);
@@ -230,7 +230,7 @@ void Creature::drawInformation(const Rect& parentRect, const Point& dest, float 
     // calculate main rects
 
     const Size nameSize = m_nameCache.getTextSize();
-    const int cropSizeText = ADJUST_CREATURE_INFORMATION_BASED_ON_CROP_SIZE ? m_drawCache.exactSize : 12,
+    const int cropSizeText = ADJUST_CREATURE_INFORMATION_BASED_ON_CROP_SIZE ? m_sizeCache.exactSize : 12,
         cropSizeBackGround = ADJUST_CREATURE_INFORMATION_BASED_ON_CROP_SIZE ? cropSizeText - nameSize.height() : 0;
 
     auto backgroundRect = Rect(p.x - (13.5), p.y - cropSizeBackGround, 27, 4);
@@ -562,12 +562,17 @@ void Creature::nextWalkUpdate()
 
     if (!m_walking) return;
 
+    const uint64_t walkDuration = std::max<uint64_t>(
+        m_stepCache.walkDuration,
+        (isLocalPlayer() ? std::max((1000 / g_app.getFps() - 1), 3) : 16)
+    );
+
     // schedules next update
     auto self = static_self_cast<Creature>();
     m_walkUpdateEvent = g_dispatcher.scheduleEvent([self] {
         self->m_walkUpdateEvent = nullptr;
         self->nextWalkUpdate();
-    }, m_stepCache.duration / SPRITE_SIZE);
+    }, walkDuration);
 }
 
 void Creature::updateWalk(const bool isPreWalking)
@@ -688,11 +693,11 @@ void Creature::setOutfit(const Outfit& outfit)
     // Cache
     {
         if (m_outfit.getCategory() == ThingCategoryCreature)
-            m_drawCache.exactSize = getExactSize();
+            m_sizeCache.exactSize = getExactSize();
         else
-            m_drawCache.exactSize = g_things.getThingType(m_outfit.getAuxId(), m_outfit.getCategory())->getExactSize();
+            m_sizeCache.exactSize = g_things.getThingType(m_outfit.getAuxId(), m_outfit.getCategory())->getExactSize();
 
-        m_drawCache.frameSizeNotResized = std::max<int>(m_drawCache.exactSize * 0.75f, 2 * SPRITE_SIZE * 0.75f);
+        m_sizeCache.frameSizeNotResized = std::max<int>(m_sizeCache.exactSize * 0.75f, 2 * SPRITE_SIZE * 0.75f);
     }
 }
 
@@ -770,12 +775,12 @@ void Creature::setSkull(uint8_t skull) { callLuaField("onSkullChange", m_skull =
 void Creature::setShield(uint8_t shield) { callLuaField("onShieldChange", m_shield = shield); }
 void Creature::setEmblem(uint8_t emblem) { callLuaField("onEmblemChange", m_emblem = emblem); }
 
-void Creature::setTypeTexture(const std::string_view filename) { m_typeTexture = g_textures.getTexture(filename); }
-void Creature::setIconTexture(const std::string_view filename) { m_iconTexture = g_textures.getTexture(filename); }
-void Creature::setSkullTexture(const std::string_view filename) { m_skullTexture = g_textures.getTexture(filename); }
-void Creature::setEmblemTexture(const std::string_view filename) { m_emblemTexture = g_textures.getTexture(filename); }
+void Creature::setTypeTexture(const std::string& filename) { m_typeTexture = g_textures.getTexture(filename); }
+void Creature::setIconTexture(const std::string& filename) { m_iconTexture = g_textures.getTexture(filename); }
+void Creature::setSkullTexture(const std::string& filename) { m_skullTexture = g_textures.getTexture(filename); }
+void Creature::setEmblemTexture(const std::string& filename) { m_emblemTexture = g_textures.getTexture(filename); }
 
-void Creature::setShieldTexture(const std::string_view filename, bool blink)
+void Creature::setShieldTexture(const std::string& filename, bool blink)
 {
     m_shieldTexture = g_textures.getTexture(filename);
     m_showShieldTexture = true;
@@ -864,6 +869,7 @@ uint64_t Creature::getStepDuration(bool ignoreDiagonal, Otc::Direction dir)
             stepDuration += 8.f;
 
         m_stepCache.duration = stepDuration;
+        m_stepCache.walkDuration = m_stepCache.duration / SPRITE_SIZE;
         m_stepCache.diagonalDuration = stepDuration * (g_game.getClientVersion() > 810 || FORCE_NEW_WALKING_FORMULA ? 3 : 2);
     }
 

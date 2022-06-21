@@ -25,10 +25,6 @@
 #include <any>
 #include <cstddef>
 #include <cstdint>
-#include <unordered_map>
-#include <string_view>
-
-using namespace std::literals;
 
 using uchar = unsigned char;
 using ushort = unsigned short;

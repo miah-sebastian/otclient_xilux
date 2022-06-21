@@ -129,7 +129,7 @@ public:
 
     TilePtr getTopTile(Position tilePos);
 
-    void setCrosshairTexture(const std::string_view texturePath);
+    void setCrosshairTexture(const std::string& texturePath);
     void setAntiAliasingMode(AntialiasingMode mode);
 
     void onMouseMove(const Position& mousePos, bool isVirtualMove = false);
@@ -148,6 +148,7 @@ protected:
     void onTileUpdate(const Position& pos, const ThingPtr& thing, Otc::Operation operation);
     void onMapCenterChange(const Position& newPos, const Position& oldPos);
     void onCameraMove(const Point& offset);
+    void onFadeInFinished();
 
     friend class Map;
     friend class Tile;
@@ -175,8 +176,9 @@ private:
     };
 
     void updateGeometry(const Size& visibleDimension);
-    void updateVisibleTilesCache();
-    void requestVisibleTilesCacheUpdate() { m_mustUpdateVisibleTilesCache = true; }
+    void updateVisibleTiles();
+    void refreshVisibleTiles() { m_refreshVisibleTiles = true; }
+    void refreshVisibleCreatures() { m_refreshVisibleCreatures = true; }
 
     uint8_t calcFirstVisibleFloor(bool checkLimitsFloorsView);
     uint8_t calcLastVisibleFloor();
@@ -224,7 +226,8 @@ private:
         m_fadeInTime{ 0 },
         m_fadeOutTime{ 0 },
         m_shadowFloorIntensity{ 0 },
-        m_scaleFactor{ 1.f };
+        m_scaleFactor{ 1.f },
+        m_lastFadeLevel{ 1.f };
 
     Rect m_rectDimension;
 
@@ -240,8 +243,8 @@ private:
     AwareRange m_viewport;
 
     bool
-        m_mustUpdateVisibleTilesCache{ true },
-        m_mustUpdateVisibleCreaturesCache{ true },
+        m_refreshVisibleTiles{ true },
+        m_refreshVisibleCreatures{ true },
         m_shaderSwitchDone{ true },
         m_drawHealthBars{ true },
         m_drawManaBar{ true },

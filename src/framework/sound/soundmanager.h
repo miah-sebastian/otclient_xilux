@@ -46,23 +46,23 @@ public:
     void stopAll();
 
     void preload(std::string filename);
-    SoundSourcePtr play(const std::string_view filename, float fadetime = 0, float gain = 1.0f, float pitch = 1.0f);
+    SoundSourcePtr play(const std::string& filename, float fadetime = 0, float gain = 1.0f, float pitch = 1.0f);
     SoundChannelPtr getChannel(int channel);
 
-    std::string resolveSoundFile(const std::string_view file);
+    std::string resolveSoundFile(const std::string& file);
     void ensureContext();
 
 private:
-    SoundSourcePtr createSoundSource(const std::string_view filename);
+    SoundSourcePtr createSoundSource(const std::string& filename);
 
     ALCdevice* m_device;
     ALCcontext* m_context;
 
     std::map<StreamSoundSourcePtr, std::shared_future<SoundFilePtr>> m_streamFiles;
-    std::unordered_map<std::string, SoundBufferPtr> m_buffers;
+    stdext::unordered_map<std::string, SoundBufferPtr> m_buffers;
     std::vector<SoundSourcePtr> m_sources;
     bool m_audioEnabled{ true };
-    std::unordered_map<int, SoundChannelPtr> m_channels;
+    stdext::unordered_map<int, SoundChannelPtr> m_channels;
 };
 
 extern SoundManager g_sounds;

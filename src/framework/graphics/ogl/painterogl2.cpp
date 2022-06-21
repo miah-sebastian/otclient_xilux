@@ -31,14 +31,14 @@ PainterOGL2::PainterOGL2()
 {
     m_drawTexturedProgram = PainterShaderProgramPtr(new PainterShaderProgram);
     assert(m_drawTexturedProgram);
-    m_drawTexturedProgram->addShaderFromSourceCode(Shader::Vertex, std::string{ glslMainWithTexCoordsVertexShader } + glslPositionOnlyVertexShader.data());
-    m_drawTexturedProgram->addShaderFromSourceCode(Shader::Fragment, std::string{ glslMainFragmentShader } + glslTextureSrcFragmentShader.data());
+    m_drawTexturedProgram->addShaderFromSourceCode(ShaderType::VERTEX, std::string{ glslMainWithTexCoordsVertexShader } + glslPositionOnlyVertexShader.data());
+    m_drawTexturedProgram->addShaderFromSourceCode(ShaderType::FRAGMENT, std::string{ glslMainFragmentShader } + glslTextureSrcFragmentShader.data());
     m_drawTexturedProgram->link();
 
     m_drawSolidColorProgram = PainterShaderProgramPtr(new PainterShaderProgram);
     assert(m_drawSolidColorProgram);
-    m_drawSolidColorProgram->addShaderFromSourceCode(Shader::Vertex, std::string{ glslMainVertexShader } + glslPositionOnlyVertexShader.data());
-    m_drawSolidColorProgram->addShaderFromSourceCode(Shader::Fragment, std::string{ glslMainFragmentShader } + glslSolidColorFragmentShader.data());
+    m_drawSolidColorProgram->addShaderFromSourceCode(ShaderType::VERTEX, std::string{ glslMainVertexShader } + glslPositionOnlyVertexShader.data());
+    m_drawSolidColorProgram->addShaderFromSourceCode(ShaderType::FRAGMENT, std::string{ glslMainFragmentShader } + glslSolidColorFragmentShader.data());
     m_drawSolidColorProgram->link();
 
     PainterShaderProgram::release();
@@ -88,14 +88,31 @@ void PainterOGL2::drawCoords(CoordsBuffer& coordsBuffer, DrawMode drawMode)
     m_drawProgram->setResolution(m_resolution);
     m_drawProgram->updateTime();
 
+    coordsBuffer.cache(); // Try to cache
+
     // only set texture coords arrays when needed
-    if (textured) {
-        m_drawProgram->setAttributeArray(PainterShaderProgram::TEXCOORD_ATTR, coordsBuffer.getTextureCoordArray(), 2);
-    } else
-        PainterShaderProgram::disableAttributeArray(PainterShaderProgram::TEXCOORD_ATTR);
+    {
+        if (textured) {
+            auto* hardwareBuffer = coordsBuffer.getHardwareTextureCoordCache();
+            if (hardwareBuffer)
+                hardwareBuffer->bind();
+
+            m_drawProgram->setAttributeArray(PainterShaderProgram::TEXCOORD_ATTR, hardwareBuffer ? nullptr : coordsBuffer.getTextureCoordArray(), 2);
+        } else
+            PainterShaderProgram::disableAttributeArray(PainterShaderProgram::TEXCOORD_ATTR);
+    }
 
     // set vertex array
-    m_drawProgram->setAttributeArray(PainterShaderProgram::VERTEX_ATTR, coordsBuffer.getVertexArray(), 2);
+    {
+        auto* hardwareBuffer = coordsBuffer.getHardwareVertexCache();
+        if (hardwareBuffer)
+            hardwareBuffer->bind();
+
+        m_drawProgram->setAttributeArray(PainterShaderProgram::VERTEX_ATTR, hardwareBuffer ? nullptr : coordsBuffer.getVertexArray(), 2);
+    }
+
+    if (coordsBuffer.isCached())
+        HardwareBuffer::unbind(HardwareBuffer::Type::VERTEX_BUFFER);
 
     // draw the element in coords buffers
     glDrawArrays(static_cast<GLenum>(drawMode), 0, vertexCount);

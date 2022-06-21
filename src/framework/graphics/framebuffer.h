@@ -26,18 +26,6 @@
 #include "painter.h"
 #include "texture.h"
 
-enum class DrawMethodType
-{
-    DRAW_FILL_COORDS,
-    DRAW_TEXTURE_COORDS,
-    DRAW_TEXTURED_RECT,
-    DRAW_UPSIDEDOWN_TEXTURED_RECT,
-    DRAW_REPEATED_TEXTURED_RECT,
-    DRAW_FILLED_RECT,
-    DRAW_FILLED_TRIANGLE,
-    DRAW_BOUNDING_RECT
-};
-
 class FrameBuffer : public stdext::shared_object
 {
 public:
@@ -45,7 +33,7 @@ public:
 
     void release();
     void resize(const Size& size);
-    void bind(const Rect& dest, const Rect& src);
+    void bind();
     void draw();
 
     void setSmooth(bool enabled) { m_smooth = enabled; m_texture = nullptr; }
@@ -57,7 +45,7 @@ public:
     bool isBackuping() { return m_backuping; }
     bool isSmooth() { return m_smooth; }
 
-    void setCompositionMode(const Painter::CompositionMode mode) { m_compositeMode = mode; }
+    void setCompositionMode(const CompositionMode mode) { m_compositeMode = mode; }
     void disableBlend() { m_disableBlend = true; }
 
 protected:
@@ -72,16 +60,16 @@ private:
     void internalCreate();
     void internalBind();
     void internalRelease();
+    void prepare(const Rect& dest, const Rect& src, const Color& colorClear = Color::alpha);
 
     static uint boundFbo;
 
+    Matrix3 m_textureMatrix;
     TexturePtr m_texture, m_screenBackup;
-
-    Size m_bckResolution;
 
     uint32_t m_fbo, m_prevBoundFbo;
 
-    Painter::CompositionMode m_compositeMode{ Painter::CompositionMode_Normal };
+    CompositionMode m_compositeMode{ CompositionMode::NORMAL };
 
     bool m_backuping{ true },
         m_smooth{ true },

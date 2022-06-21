@@ -20,45 +20,24 @@
  * THE SOFTWARE.
  */
 
-#pragma once
+#include "hardwarebuffer.h"
+#include "graphics.h"
 
-#include "soundsource.h"
+#include <framework/core/application.h>
+#include <framework/core/logger.h>
 
- // @bindclass
-class SoundChannel : public LuaObject
+HardwareBuffer::HardwareBuffer(Type type) :m_type(type)
 {
-public:
-    SoundChannel(int id) : m_id(id), m_gain(1) {}
+    glGenBuffers(1, &m_id);
+    if (!m_id)
+        g_logger.fatal("Unable to create hardware buffer.");
+}
 
-    SoundSourcePtr play(const std::string& filename, float fadetime = 0, float gain = 1.0f, float pitch = 1.0f);
-    void stop(float fadetime = 0);
-    void enqueue(const std::string& filename, float fadetime = 0, float gain = 1.0f, float pitch = 1.0f);
-    void enable() { setEnabled(true); }
-    void disable() { setEnabled(false); }
-
-    void setGain(float gain);
-    float getGain() { return m_gain; }
-
-    void setEnabled(bool enable);
-    bool isEnabled() { return m_enabled; }
-
-    int getId() { return m_id; }
-
-protected:
-    void update();
-    friend class SoundManager;
-
-private:
-    struct QueueEntry
-    {
-        std::string filename;
-        float fadetime;
-        float gain;
-        float pitch;
-    };
-    std::deque<QueueEntry> m_queue;
-    SoundSourcePtr m_currentSource;
-    bool m_enabled{ true };
-    int m_id;
-    float m_gain;
-};
+HardwareBuffer::~HardwareBuffer()
+{
+#ifndef NDEBUG
+    assert(!g_app.isTerminated());
+#endif
+    if (g_graphics.ok())
+        glDeleteBuffers(1, &m_id);
+}

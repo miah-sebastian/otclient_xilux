@@ -35,14 +35,14 @@ public:
     void clearCache();
     void liveReload();
 
-    void preload(const std::string_view fileName) { getTexture(fileName); }
-    TexturePtr getTexture(const std::string_view fileName);
+    void preload(const std::string& fileName) { getTexture(fileName); }
+    TexturePtr getTexture(const std::string& fileName);
     const TexturePtr& getEmptyTexture() { return m_emptyTexture; }
 
 private:
     TexturePtr loadTexture(std::stringstream& file);
 
-    std::unordered_map<std::string, TexturePtr> m_textures;
+    stdext::unordered_map<std::string, TexturePtr> m_textures;
     std::vector<AnimatedTexturePtr> m_animatedTextures;
     TexturePtr m_emptyTexture;
     ScheduledEventPtr m_liveReloadEvent;

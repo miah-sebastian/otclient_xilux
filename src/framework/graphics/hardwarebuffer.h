@@ -22,43 +22,32 @@
 
 #pragma once
 
-#include "soundsource.h"
+#include "declarations.h"
 
- // @bindclass
-class SoundChannel : public LuaObject
+class HardwareBuffer
 {
 public:
-    SoundChannel(int id) : m_id(id), m_gain(1) {}
+    enum class Type
+    {
+        VERTEX_BUFFER = GL_ARRAY_BUFFER,
+        INDEX_BUFFER = GL_ELEMENT_ARRAY_BUFFER
+    };
 
-    SoundSourcePtr play(const std::string& filename, float fadetime = 0, float gain = 1.0f, float pitch = 1.0f);
-    void stop(float fadetime = 0);
-    void enqueue(const std::string& filename, float fadetime = 0, float gain = 1.0f, float pitch = 1.0f);
-    void enable() { setEnabled(true); }
-    void disable() { setEnabled(false); }
+    enum class UsagePattern
+    {
+        STREAM_DRAW = GL_STREAM_DRAW,
+        STATIC_DRAW = GL_STATIC_DRAW,
+        DYNAMIC_DRAW = GL_DYNAMIC_DRAW
+    };
 
-    void setGain(float gain);
-    float getGain() { return m_gain; }
+    HardwareBuffer(Type type);
+    ~HardwareBuffer();
 
-    void setEnabled(bool enable);
-    bool isEnabled() { return m_enabled; }
-
-    int getId() { return m_id; }
-
-protected:
-    void update();
-    friend class SoundManager;
+    void bind() { glBindBuffer(static_cast<GLenum>(m_type), m_id); }
+    static void unbind(Type type) { glBindBuffer(static_cast<GLenum>(type), 0); }
+    void write(void* data, int count, UsagePattern usage) { glBufferData(static_cast<GLenum>(m_type), count, data, static_cast<GLenum>(usage)); }
 
 private:
-    struct QueueEntry
-    {
-        std::string filename;
-        float fadetime;
-        float gain;
-        float pitch;
-    };
-    std::deque<QueueEntry> m_queue;
-    SoundSourcePtr m_currentSource;
-    bool m_enabled{ true };
-    int m_id;
-    float m_gain;
+    Type m_type;
+    uint m_id;
 };

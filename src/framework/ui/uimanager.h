@@ -42,13 +42,13 @@ public:
     void updateHoveredWidget(bool now = false);
 
     void clearStyles();
-    bool importStyle(const std::string_view file);
+    bool importStyle(const std::string& file);
     void importStyleFromOTML(const OTMLNodePtr& styleNode);
     OTMLNodePtr getStyle(const std::string_view styleName);
     std::string getStyleClass(const std::string_view styleName);
 
-    UIWidgetPtr loadUI(const std::string_view file, const UIWidgetPtr& parent);
-    UIWidgetPtr displayUI(const std::string_view file) { return loadUI(file, m_rootWidget); }
+    UIWidgetPtr loadUI(const std::string& file, const UIWidgetPtr& parent);
+    UIWidgetPtr displayUI(const std::string& file) { return loadUI(file, m_rootWidget); }
     UIWidgetPtr createWidget(const std::string_view styleName, const UIWidgetPtr& parent);
     UIWidgetPtr createWidgetFromOTML(const OTMLNodePtr& widgetNode, const UIWidgetPtr& parent);
 
@@ -84,7 +84,7 @@ private:
     UIWidgetPtr m_pressedWidget;
     bool m_hoverUpdateScheduled{ false },
         m_drawDebugBoxes{ false };
-    std::unordered_map<std::string, OTMLNodePtr> m_styles;
+    stdext::unordered_map<std::string, OTMLNodePtr> m_styles;
     UIWidgetList m_destroyedWidgets;
     ScheduledEventPtr m_checkEvent;
 };

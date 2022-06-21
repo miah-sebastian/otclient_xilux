@@ -27,6 +27,7 @@
 
 #include <framework/core/declarations.h>
 #include <framework/graphics/texture.h>
+#include <framework/graphics/drawpool.h>
 #include <framework/luaengine/luaobject.h>
 #include <framework/net/server.h>
 #include <framework/otml/declarations.h>
@@ -146,9 +147,9 @@ public:
     void unserializeOtml(const OTMLNodePtr& node);
 
     void serialize(const FileStreamPtr& fin);
-    void exportImage(const std::string_view fileName);
+    void exportImage(const std::string& fileName);
 
-    void draw(const Point& dest, float scaleFactor, int layer, int xPattern, int yPattern, int zPattern, int animationPhase, TextureType textureType, Color color = Color::white, LightView* lightView = nullptr);
+    void draw(const Point& dest, float scaleFactor, int layer, int xPattern, int yPattern, int zPattern, int animationPhase, TextureType textureType, Color color = Color::white, LightView* lightView = nullptr, DrawBufferPtr drawQueue = nullptr);
 
     uint16_t getId() { return m_id; }
     ThingCategory getCategory() { return m_category; }

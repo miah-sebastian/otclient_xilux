@@ -158,16 +158,16 @@ public:
     void notificateCameraMove(const Point& offset);
     void notificateKeyRelease(const InputEvent& inputEvent);
 
-    bool loadOtcm(const std::string_view fileName);
-    void saveOtcm(const std::string_view fileName);
+    bool loadOtcm(const std::string& fileName);
+    void saveOtcm(const std::string& fileName);
 
-    void loadOtbm(const std::string_view fileName);
-    void saveOtbm(const std::string_view fileName);
+    void loadOtbm(const std::string& fileName);
+    void saveOtbm(const std::string& fileName);
 
     // otbm attributes (description, size, etc.)
-    void setHouseFile(const std::string_view file) { m_attribs.set(OTBM_ATTR_HOUSE_FILE, file); }
-    void setSpawnFile(const std::string_view file) { m_attribs.set(OTBM_ATTR_SPAWN_FILE, file); }
-    void setDescription(const std::string_view desc) { m_attribs.set(OTBM_ATTR_DESCRIPTION, desc); }
+    void setHouseFile(const std::string& file) { m_attribs.set(OTBM_ATTR_HOUSE_FILE, file); }
+    void setSpawnFile(const std::string& file) { m_attribs.set(OTBM_ATTR_SPAWN_FILE, file); }
+    void setDescription(const std::string& desc) { m_attribs.set(OTBM_ATTR_DESCRIPTION, desc); }
 
     void clearDescriptions() { m_attribs.remove(OTBM_ATTR_DESCRIPTION); }
     void setWidth(uint16_t w) { m_attribs.set(OTBM_ATTR_WIDTH, w); }
@@ -278,9 +278,9 @@ private:
     std::vector<StaticTextPtr> m_staticTexts;
     std::vector<MapViewPtr> m_mapViews;
 
-    std::unordered_map<uint, TileBlock> m_tileBlocks[MAX_Z + 1];
-    std::unordered_map<uint32_t, CreaturePtr> m_knownCreatures;
-    std::unordered_map<Position, std::string, Position::Hasher> m_waypoints;
+    stdext::unordered_map<uint, TileBlock> m_tileBlocks[MAX_Z + 1];
+    stdext::unordered_map<uint32_t, CreaturePtr> m_knownCreatures;
+    stdext::unordered_map<Position, std::string, Position::Hasher> m_waypoints;
 
     std::map<uint32_t, Color> m_zoneColors;
 

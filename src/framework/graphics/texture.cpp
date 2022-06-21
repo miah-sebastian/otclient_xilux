@@ -30,11 +30,11 @@
 
 #include "framework/stdext/math.h"
 
-std::atomic<uint> LAST_ID(0);
+static std::atomic<ulong> UID(0);
 
-Texture::Texture() : m_uniqueId(++LAST_ID) {}
+Texture::Texture() : m_uniqueId(++UID) {}
 
-Texture::Texture(const Size& size) : m_uniqueId(++LAST_ID)
+Texture::Texture(const Size& size) : m_uniqueId(++UID)
 {
     m_id = 0;
     m_time = 0;
@@ -49,7 +49,7 @@ Texture::Texture(const Size& size) : m_uniqueId(++LAST_ID)
     setupFilters();
 }
 
-Texture::Texture(const ImagePtr& image, bool buildMipmaps, bool compress, bool canSuperimposed, bool load) : m_uniqueId(++LAST_ID)
+Texture::Texture(const ImagePtr& image, bool buildMipmaps, bool compress, bool canSuperimposed, bool load) : m_uniqueId(++UID)
 {
     m_id = 0;
     m_time = 0;
@@ -174,6 +174,9 @@ void Texture::setUpsideDown(bool upsideDown)
 
 void Texture::createTexture()
 {
+    if (g_graphics.ok() && m_id != 0)
+        glDeleteTextures(1, &m_id);
+
     glGenTextures(1, &m_id);
     assert(m_id != 0);
 }
@@ -197,17 +200,16 @@ bool Texture::setupSize(const Size& size, bool forcePowerOfTwo)
 
     m_size = size;
     m_glSize = glSize;
+
     setupTranformMatrix();
+
     return true;
 }
 
 void Texture::setupWrap()
 {
-    int texParam;
-    if (!m_repeat && g_graphics.canUseClampToEdge())
-        texParam = GL_CLAMP_TO_EDGE;
-    else
-        texParam = GL_REPEAT;
+    const int texParam = !m_repeat && g_graphics.canUseClampToEdge()
+        ? GL_CLAMP_TO_EDGE : GL_REPEAT;
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParam);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texParam);

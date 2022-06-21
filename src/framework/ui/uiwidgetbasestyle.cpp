@@ -32,19 +32,15 @@
 #include <framework/graphics/texture.h>
 #include <framework/graphics/texturemanager.h>
 
+#include <atomic>
+
 void UIWidget::initBaseStyle()
 {
-    m_backgroundColor = Color::alpha;
+    static std::atomic<uint32_t> UID(0);
     m_borderColor.set(Color::black);
-    m_iconColor = Color::white;
-    m_color = Color::white;
-    m_opacity = 1.0f;
-    m_rotation = 0.0f;
-    m_iconAlign = Fw::AlignNone;
 
     // generate an unique id, this is need because anchored layouts find widgets by id
-    static unsigned long id = 1;
-    m_id = stdext::format("widget%d", ++id);
+    m_id = stdext::format("widget%d", ++UID);
 }
 
 void UIWidget::parseBaseStyle(const OTMLNodePtr& styleNode)
@@ -388,7 +384,7 @@ void UIWidget::drawIcon(const Rect& screenCoords)
     g_drawPool.addTexturedRect(drawRect, m_icon, m_iconClipRect, m_iconColor);
 }
 
-void UIWidget::setIcon(const std::string_view iconFile)
+void UIWidget::setIcon(const std::string& iconFile)
 {
     m_icon = iconFile.empty() ? nullptr : g_textures.getTexture(iconFile);
     if (m_icon && !m_iconClipRect.isValid())

@@ -65,7 +65,7 @@ public:
     void setResolution(const Size& resolution);
     void updateTime();
 
-    void addMultiTexture(const std::string_view file);
+    void addMultiTexture(const std::string& file);
     void bindMultiTextures();
 
 private:
@@ -75,9 +75,9 @@ private:
 
     Color m_color{ Color::white };
 
-    Matrix3 m_transformMatrix = DEFAULT_MATRIX_3,
-        m_projectionMatrix = DEFAULT_MATRIX_3,
-        m_textureMatrix = DEFAULT_MATRIX_3;
+    Matrix3 m_transformMatrix,
+        m_projectionMatrix,
+        m_textureMatrix;
 
     Size m_resolution;
 

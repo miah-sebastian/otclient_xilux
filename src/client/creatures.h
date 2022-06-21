@@ -75,7 +75,7 @@ protected:
 
 private:
     stdext::dynamic_storage8<SpawnAttr, SpawnAttrLast> m_attribs;
-    std::unordered_map<Position, CreatureTypePtr, Position::Hasher> m_creatures;
+    stdext::unordered_map<Position, CreatureTypePtr, Position::Hasher> m_creatures;
     friend class CreatureManager;
 };
 
@@ -83,12 +83,12 @@ class CreatureType : public LuaObject
 {
 public:
     CreatureType() = default;
-    CreatureType(const std::string_view name) { setName(name); }
+    CreatureType(const std::string& name) { setName(name); }
 
     void setSpawnTime(int32_t spawnTime) { m_attribs.set(CreatureAttrSpawnTime, spawnTime); }
     int32_t getSpawnTime() { return m_attribs.get<int32_t>(CreatureAttrSpawnTime); }
 
-    void setName(const std::string_view name) { m_attribs.set(CreatureAttrName, name); }
+    void setName(const std::string& name) { m_attribs.set(CreatureAttrName, name); }
     std::string getName() { return m_attribs.get<std::string>(CreatureAttrName); }
 
     void setOutfit(const Outfit& o) { m_attribs.set(CreatureAttrOutfit, o); }
@@ -114,12 +114,12 @@ public:
     void clearSpawns();
     void terminate();
 
-    void loadMonsters(const std::string_view file);
-    void loadSingleCreature(const std::string_view file);
-    void loadNpcs(const std::string_view folder);
-    void loadCreatureBuffer(const std::string_view buffer);
-    void loadSpawns(const std::string_view fileName);
-    void saveSpawns(const std::string_view fileName);
+    void loadMonsters(const std::string& file);
+    void loadSingleCreature(const std::string& file);
+    void loadNpcs(const std::string& folder);
+    void loadCreatureBuffer(const std::string& buffer);
+    void loadSpawns(const std::string& fileName);
+    void saveSpawns(const std::string& fileName);
 
     const CreatureTypePtr& getCreatureByName(std::string name);
     const CreatureTypePtr& getCreatureByLook(int look);
@@ -140,7 +140,7 @@ protected:
 
 private:
     std::vector<CreatureTypePtr> m_creatures;
-    std::unordered_map<Position, SpawnPtr, Position::Hasher> m_spawns;
+    stdext::unordered_map<Position, SpawnPtr, Position::Hasher> m_spawns;
     bool m_loaded{ false }, m_spawnLoaded{ false };
     CreatureTypePtr m_nullCreature;
 };
