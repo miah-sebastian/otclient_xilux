@@ -198,7 +198,7 @@ function initializeSpelllist()
         tmpLabel:setPhantom(false)
 
         local iconId = tonumber(info.icon)
-        if not iconId and SpellIcons[info.icon] then iconId = SpellIcons[info.icon][1] end
+        if not iconId and SpellIcons[info.icon] then iconId = SpellIcons[info.icon] end
 
         if not (iconId) then perror('Spell icon \'' .. info.icon .. '\' not found.') end
 

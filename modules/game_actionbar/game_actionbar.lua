@@ -167,7 +167,7 @@ function initializeSpelllist()
                 tmpLabel.name = spell:lower()
 
                 local iconId = tonumber(info.icon)
-                if not iconId and SpellIcons[info.icon] then iconId = SpellIcons[info.icon][1] end
+                if not iconId and SpellIcons[info.icon] then iconId = SpellIcons[info.icon] end
 
                 tmpLabel:setHeight(SpelllistSettings[spellProfile].iconSize.height + 4)
                 tmpLabel:setTextOffset(topoint((SpelllistSettings[spellProfile].iconSize.width + 10) .. ' ' ..
