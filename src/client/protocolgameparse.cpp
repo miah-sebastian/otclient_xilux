@@ -3182,7 +3182,7 @@ void ProtocolGame::parsePreyTimeLeft(const InputMessagePtr& msg)
 
 void ProtocolGame::getPreyMonster(const InputMessagePtr& msg)
 {
-    msg->getString(); // mosnter name
+    std::string_view name = msg->getString(); // mosnter name
     const uint16_t lookType = msg->getU16(); // looktype
     if (lookType == 0) {
         msg->getU16(); // LookTypeEx
@@ -3204,7 +3204,7 @@ void ProtocolGame::getPreyMonsters(const InputMessagePtr& msg)
 
 void ProtocolGame::parsePreyData(const InputMessagePtr& msg)
 {
-    msg->getU8(); // slot
+    uint8_t slot = msg->getU8(); // slot
     const auto state = static_cast<Otc::PreyState_t>(msg->getU8()); // slot state
 
     switch (state) {
@@ -3228,7 +3228,7 @@ void ProtocolGame::parsePreyData(const InputMessagePtr& msg)
         {
             const uint8_t listSize = msg->getU8();
             for (uint8_t i = 0; i < listSize; i++) {
-                getPreyMonsters(msg);
+                getPreyMonster(msg);
             }
             break;
         }
