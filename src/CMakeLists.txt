@@ -171,6 +171,7 @@ find_package(Threads REQUIRED)
 # OpenGL/GLEW = Graphics
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
+find_package(STDUUID CONFIG REQUIRED)
 if(UNIX)
 	find_package(X11 REQUIRED)
 endif()
@@ -267,9 +268,6 @@ target_sources(${PROJECT_NAME}
 	framework/graphics/graphics.cpp
 	framework/graphics/hardwarebuffer.cpp
 	framework/graphics/image.cpp
-	framework/graphics/ogl/painterogl.cpp
-	framework/graphics/ogl/painterogl1.cpp
-	framework/graphics/ogl/painterogl2.cpp
 	framework/graphics/painter.cpp
 	framework/graphics/paintershaderprogram.cpp
 	framework/graphics/particle.cpp
@@ -367,19 +365,17 @@ if(MSVC)
 	target_include_directories(${PROJECT_NAME}
 		PRIVATE
 		${CMAKE_SOURCE_DIR}/src
-		${MYSQL_INCLUDE_DIR}
 		${LUAJIT_INCLUDE_DIR}
 		${Protobuf_INCLUDE_DIRS}
 		${VORBISFILE_INCLUDE_DIR}
-		${MYSQL_INCLUDE_DIR}
 		${GMP_INCLUDE_DIR}
 		${OPENSSL_INCLUDE_DIR}
 		${PHYSFS_INCLUDE_DIR}
+		${PARALLEL_HASHMAP_INCLUDE_DIRS}
 		${NLOHMANN_JSON_INCLUDE_DIR}
 	)
 	target_link_libraries(${PROJECT_NAME}
 		PRIVATE
-		${MYSQL_CLIENT_LIBS}
 		${LUAJIT_LIBRARY}
 		${CMAKE_THREAD_LIBS_INIT}
 		${PHYSFS_LIBRARY}
@@ -392,10 +388,10 @@ if(MSVC)
 		${VORBISFILE_LIBRARY}
 		${VORBIS_LIBRARY}
 		${OGG_LIBRARY}
-		${MYSQL_LIBRARY}
 		${GMP_LIBRARY}
 		${OPENSSL_LIBRARIES}
 		${DBGHELP_LIBRARY}
+		${STDUUID}
 
 		Threads::Threads
 		GLEW::GLEW
@@ -410,11 +406,11 @@ else()
 		${LUAJIT_INCLUDE_DIR}
 		${CMAKE_THREAD_LIBS_INIT}
 		${Protobuf_INCLUDE_DIRS}
-		${MYSQL_INCLUDE_DIR}
 		${GMP_INCLUDE_DIR}
 		${OPENSSL_INCLUDE_DIR}
 		${PHYSFS_INCLUDE_DIR}
 		${GLEW_INCLUDE_DIR}
+		${PARALLEL_HASHMAP_INCLUDE_DIRS}
 		${NLOHMANN_JSON_INCLUDE_DIR}
 	)
 	target_link_libraries(${PROJECT_NAME}
@@ -429,9 +425,9 @@ else()
 		${DirectX_LIBRARY}
 		${DirectX_LIBRARIES}
 		${OGG_LIBRARY}
-		${MYSQL_LIBRARY}
 		${GMP_LIBRARY}
 		${OPENSSL_LIBRARIES}
+		${STDUUID}
 
 		Threads::Threads
 		X11::X11
