@@ -38,7 +38,7 @@ struct CoordinateDefaultTypeInternal {
     Coordinate _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CoordinateDefaultTypeInternal _Coordinate_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CoordinateDefaultTypeInternal _Coordinate_default_instance_;
 PROTOBUF_CONSTEXPR Appearances::Appearances(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -56,7 +56,7 @@ struct AppearancesDefaultTypeInternal {
     Appearances _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearancesDefaultTypeInternal _Appearances_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearancesDefaultTypeInternal _Appearances_default_instance_;
 PROTOBUF_CONSTEXPR SpritePhase::SpritePhase(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -71,7 +71,7 @@ struct SpritePhaseDefaultTypeInternal {
     SpritePhase _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SpritePhaseDefaultTypeInternal _SpritePhase_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SpritePhaseDefaultTypeInternal _SpritePhase_default_instance_;
 PROTOBUF_CONSTEXPR SpriteAnimation::SpriteAnimation(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -90,7 +90,7 @@ struct SpriteAnimationDefaultTypeInternal {
     SpriteAnimation _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SpriteAnimationDefaultTypeInternal _SpriteAnimation_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SpriteAnimationDefaultTypeInternal _SpriteAnimation_default_instance_;
 PROTOBUF_CONSTEXPR Box::Box(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -107,7 +107,7 @@ struct BoxDefaultTypeInternal {
     Box _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 BoxDefaultTypeInternal _Box_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 BoxDefaultTypeInternal _Box_default_instance_;
 PROTOBUF_CONSTEXPR SpriteInfo::SpriteInfo(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -129,7 +129,7 @@ struct SpriteInfoDefaultTypeInternal {
     SpriteInfo _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SpriteInfoDefaultTypeInternal _SpriteInfo_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SpriteInfoDefaultTypeInternal _SpriteInfo_default_instance_;
 PROTOBUF_CONSTEXPR FrameGroup::FrameGroup(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -145,7 +145,7 @@ struct FrameGroupDefaultTypeInternal {
     FrameGroup _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FrameGroupDefaultTypeInternal _FrameGroup_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FrameGroupDefaultTypeInternal _FrameGroup_default_instance_;
 PROTOBUF_CONSTEXPR Appearance::Appearance(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -163,7 +163,7 @@ struct AppearanceDefaultTypeInternal {
     Appearance _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceDefaultTypeInternal _Appearance_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceDefaultTypeInternal _Appearance_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlags::AppearanceFlags(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -224,7 +224,7 @@ struct AppearanceFlagsDefaultTypeInternal {
     AppearanceFlags _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagsDefaultTypeInternal _AppearanceFlags_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagsDefaultTypeInternal _AppearanceFlags_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagUpgradeClassification::AppearanceFlagUpgradeClassification(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -238,7 +238,7 @@ struct AppearanceFlagUpgradeClassificationDefaultTypeInternal {
     AppearanceFlagUpgradeClassification _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagUpgradeClassificationDefaultTypeInternal _AppearanceFlagUpgradeClassification_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagUpgradeClassificationDefaultTypeInternal _AppearanceFlagUpgradeClassification_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagBank::AppearanceFlagBank(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -252,7 +252,7 @@ struct AppearanceFlagBankDefaultTypeInternal {
     AppearanceFlagBank _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagBankDefaultTypeInternal _AppearanceFlagBank_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagBankDefaultTypeInternal _AppearanceFlagBank_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagWrite::AppearanceFlagWrite(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -266,7 +266,7 @@ struct AppearanceFlagWriteDefaultTypeInternal {
     AppearanceFlagWrite _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagWriteDefaultTypeInternal _AppearanceFlagWrite_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagWriteDefaultTypeInternal _AppearanceFlagWrite_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagWriteOnce::AppearanceFlagWriteOnce(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -280,7 +280,7 @@ struct AppearanceFlagWriteOnceDefaultTypeInternal {
     AppearanceFlagWriteOnce _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagWriteOnceDefaultTypeInternal _AppearanceFlagWriteOnce_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagWriteOnceDefaultTypeInternal _AppearanceFlagWriteOnce_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagLight::AppearanceFlagLight(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -295,7 +295,7 @@ struct AppearanceFlagLightDefaultTypeInternal {
     AppearanceFlagLight _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagLightDefaultTypeInternal _AppearanceFlagLight_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagLightDefaultTypeInternal _AppearanceFlagLight_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagHeight::AppearanceFlagHeight(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -309,7 +309,7 @@ struct AppearanceFlagHeightDefaultTypeInternal {
     AppearanceFlagHeight _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagHeightDefaultTypeInternal _AppearanceFlagHeight_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagHeightDefaultTypeInternal _AppearanceFlagHeight_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagShift::AppearanceFlagShift(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -324,7 +324,7 @@ struct AppearanceFlagShiftDefaultTypeInternal {
     AppearanceFlagShift _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagShiftDefaultTypeInternal _AppearanceFlagShift_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagShiftDefaultTypeInternal _AppearanceFlagShift_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagClothes::AppearanceFlagClothes(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -338,7 +338,7 @@ struct AppearanceFlagClothesDefaultTypeInternal {
     AppearanceFlagClothes _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagClothesDefaultTypeInternal _AppearanceFlagClothes_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagClothesDefaultTypeInternal _AppearanceFlagClothes_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagDefaultAction::AppearanceFlagDefaultAction(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -352,7 +352,7 @@ struct AppearanceFlagDefaultActionDefaultTypeInternal {
     AppearanceFlagDefaultAction _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagDefaultActionDefaultTypeInternal _AppearanceFlagDefaultAction_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagDefaultActionDefaultTypeInternal _AppearanceFlagDefaultAction_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagMarket::AppearanceFlagMarket(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -371,7 +371,7 @@ struct AppearanceFlagMarketDefaultTypeInternal {
     AppearanceFlagMarket _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagMarketDefaultTypeInternal _AppearanceFlagMarket_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagMarketDefaultTypeInternal _AppearanceFlagMarket_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagNPC::AppearanceFlagNPC(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -390,7 +390,7 @@ struct AppearanceFlagNPCDefaultTypeInternal {
     AppearanceFlagNPC _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagNPCDefaultTypeInternal _AppearanceFlagNPC_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagNPCDefaultTypeInternal _AppearanceFlagNPC_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagAutomap::AppearanceFlagAutomap(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -404,7 +404,7 @@ struct AppearanceFlagAutomapDefaultTypeInternal {
     AppearanceFlagAutomap _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagAutomapDefaultTypeInternal _AppearanceFlagAutomap_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagAutomapDefaultTypeInternal _AppearanceFlagAutomap_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagHook::AppearanceFlagHook(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -419,7 +419,7 @@ struct AppearanceFlagHookDefaultTypeInternal {
     AppearanceFlagHook _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagHookDefaultTypeInternal _AppearanceFlagHook_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagHookDefaultTypeInternal _AppearanceFlagHook_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagLenshelp::AppearanceFlagLenshelp(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -433,7 +433,7 @@ struct AppearanceFlagLenshelpDefaultTypeInternal {
     AppearanceFlagLenshelp _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagLenshelpDefaultTypeInternal _AppearanceFlagLenshelp_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagLenshelpDefaultTypeInternal _AppearanceFlagLenshelp_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagChangedToExpire::AppearanceFlagChangedToExpire(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -447,7 +447,7 @@ struct AppearanceFlagChangedToExpireDefaultTypeInternal {
     AppearanceFlagChangedToExpire _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagChangedToExpireDefaultTypeInternal _AppearanceFlagChangedToExpire_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagChangedToExpireDefaultTypeInternal _AppearanceFlagChangedToExpire_default_instance_;
 PROTOBUF_CONSTEXPR AppearanceFlagCyclopedia::AppearanceFlagCyclopedia(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -461,7 +461,7 @@ struct AppearanceFlagCyclopediaDefaultTypeInternal {
     AppearanceFlagCyclopedia _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagCyclopediaDefaultTypeInternal _AppearanceFlagCyclopedia_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AppearanceFlagCyclopediaDefaultTypeInternal _AppearanceFlagCyclopedia_default_instance_;
 PROTOBUF_CONSTEXPR SpecialMeaningAppearanceIds::SpecialMeaningAppearanceIds(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -480,7 +480,7 @@ struct SpecialMeaningAppearanceIdsDefaultTypeInternal {
     SpecialMeaningAppearanceIds _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SpecialMeaningAppearanceIdsDefaultTypeInternal _SpecialMeaningAppearanceIds_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SpecialMeaningAppearanceIdsDefaultTypeInternal _SpecialMeaningAppearanceIds_default_instance_;
 }  // namespace appearances
 }  // namespace protobuf
 }  // namespace otclient
