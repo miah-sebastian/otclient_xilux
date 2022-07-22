@@ -3226,10 +3226,7 @@ void ProtocolGame::parsePreyData(const InputMessagePtr& msg)
         }
         case Otc::PREY_STATE_SELECTION:
         {
-            const uint8_t listSize = msg->getU8();
-            for (uint8_t i = 0; i < listSize; i++) {
-                getPreyMonster(msg);
-            }
+            getPreyMonsters(msg);
             break;
         }
         case Otc::PREY_STATE_SELECTION_CHANGE_MONSTER:
@@ -3237,10 +3234,7 @@ void ProtocolGame::parsePreyData(const InputMessagePtr& msg)
             msg->getU8(); // bonus type
             msg->getU16(); // bonus value
             msg->getU8(); // bonus grade
-            const uint8_t listSize = msg->getU8();
-            for (uint8_t i = 0; i < listSize; i++) {
-                getPreyMonsters(msg);
-            }
+            getPreyMonsters(msg);
             break;
         }
         case Otc::PREY_STATE_LIST_SELECTION:

@@ -78,9 +78,16 @@ protected:
     UIWidgetList m_lockedChildren;
     UIWidgetPtr m_focusedChild;
     OTMLNodePtr m_style;
+
+    stdext::map<std::string, UIWidgetPtr> m_childrenById;
+
     Timer m_clickTimer;
     Fw::FocusReason m_lastFocusReason{ Fw::ActiveFocusReason };
     Fw::AutoFocusPolicy m_autoFocusPolicy{ Fw::AutoFocusLast };
+
+    friend class UIGridLayout;
+    friend class UIHorizontalLayout;
+    friend class UIVerticalLayout;
 
 public:
     void addChild(const UIWidgetPtr& child);
@@ -140,7 +147,7 @@ public:
     bool isAnchored();
     bool isChildLocked(const UIWidgetPtr& child);
     bool hasChild(const UIWidgetPtr& child);
-    int getChildIndex(const UIWidgetPtr& child);
+    int getChildIndex(const UIWidgetPtr& child) { return m_childIndex; }
     Rect getPaddingRect();
     Rect getMarginRect();
     Rect getChildrenRect();
@@ -159,6 +166,7 @@ public:
     UIWidgetPtr backwardsGetWidgetById(const std::string_view id);
 
 private:
+    void repaint();
     bool m_updateEventScheduled{ false },
         m_loadingStyle{ false };
 
@@ -293,6 +301,7 @@ protected:
     float m_rotation{ 0.f };
     int m_autoRepeatDelay{ 500 };
     Point m_lastClickPosition;
+    int m_childIndex{ -1 };
 
 public:
     void setX(int x) { move(x, getY()); }
@@ -301,36 +310,36 @@ public:
     void setHeight(int height) { resize(getWidth(), height); }
     void setSize(const Size& size) { resize(size.width(), size.height()); }
     void setPosition(const Point& pos) { move(pos.x, pos.y); }
-    void setColor(const Color& color) { m_color = color; }
-    void setBackgroundColor(const Color& color) { m_backgroundColor = color; }
-    void setBackgroundOffsetX(int x) { m_backgroundRect.setX(x); }
-    void setBackgroundOffsetY(int y) { m_backgroundRect.setX(y); }
-    void setBackgroundOffset(const Point& pos) { m_backgroundRect.move(pos); }
-    void setBackgroundWidth(int width) { m_backgroundRect.setWidth(width); }
-    void setBackgroundHeight(int height) { m_backgroundRect.setHeight(height); }
-    void setBackgroundSize(const Size& size) { m_backgroundRect.resize(size); }
-    void setBackgroundRect(const Rect& rect) { m_backgroundRect = rect; }
+    void setColor(const Color& color) { m_color = color; repaint(); }
+    void setBackgroundColor(const Color& color) { m_backgroundColor = color; repaint(); }
+    void setBackgroundOffsetX(int x) { m_backgroundRect.setX(x); repaint(); }
+    void setBackgroundOffsetY(int y) { m_backgroundRect.setX(y); repaint(); }
+    void setBackgroundOffset(const Point& pos) { m_backgroundRect.move(pos); repaint(); }
+    void setBackgroundWidth(int width) { m_backgroundRect.setWidth(width); repaint(); }
+    void setBackgroundHeight(int height) { m_backgroundRect.setHeight(height); repaint(); }
+    void setBackgroundSize(const Size& size) { m_backgroundRect.resize(size); repaint(); }
+    void setBackgroundRect(const Rect& rect) { m_backgroundRect = rect; repaint(); }
     void setIcon(const std::string& iconFile);
-    void setIconColor(const Color& color) { m_iconColor = color; }
-    void setIconOffsetX(int x) { m_iconOffset.x = x; }
-    void setIconOffsetY(int y) { m_iconOffset.y = y; }
-    void setIconOffset(const Point& pos) { m_iconOffset = pos; }
-    void setIconWidth(int width) { m_iconRect.setWidth(width); }
-    void setIconHeight(int height) { m_iconRect.setHeight(height); }
-    void setIconSize(const Size& size) { m_iconRect.resize(size); }
-    void setIconRect(const Rect& rect) { m_iconRect = rect; }
-    void setIconClip(const Rect& rect) { m_iconClipRect = rect; }
-    void setIconAlign(Fw::AlignmentFlag align) { m_iconAlign = align; }
+    void setIconColor(const Color& color) { m_iconColor = color; repaint(); }
+    void setIconOffsetX(int x) { m_iconOffset.x = x; repaint(); }
+    void setIconOffsetY(int y) { m_iconOffset.y = y; repaint(); }
+    void setIconOffset(const Point& pos) { m_iconOffset = pos; repaint(); }
+    void setIconWidth(int width) { m_iconRect.setWidth(width); repaint(); }
+    void setIconHeight(int height) { m_iconRect.setHeight(height); repaint(); }
+    void setIconSize(const Size& size) { m_iconRect.resize(size); repaint(); }
+    void setIconRect(const Rect& rect) { m_iconRect = rect; repaint(); }
+    void setIconClip(const Rect& rect) { m_iconClipRect = rect; repaint(); }
+    void setIconAlign(Fw::AlignmentFlag align) { m_iconAlign = align; repaint(); }
     void setBorderWidth(int width) { m_borderWidth.set(width); updateLayout(); }
-    void setBorderWidthTop(int width) { m_borderWidth.top = width; }
-    void setBorderWidthRight(int width) { m_borderWidth.right = width; }
-    void setBorderWidthBottom(int width) { m_borderWidth.bottom = width; }
-    void setBorderWidthLeft(int width) { m_borderWidth.left = width; }
+    void setBorderWidthTop(int width) { m_borderWidth.top = width; repaint(); }
+    void setBorderWidthRight(int width) { m_borderWidth.right = width; repaint(); }
+    void setBorderWidthBottom(int width) { m_borderWidth.bottom = width; repaint(); }
+    void setBorderWidthLeft(int width) { m_borderWidth.left = width; repaint(); }
     void setBorderColor(const Color& color) { m_borderColor.set(color); updateLayout(); }
-    void setBorderColorTop(const Color& color) { m_borderColor.top = color; }
-    void setBorderColorRight(const Color& color) { m_borderColor.right = color; }
-    void setBorderColorBottom(const Color& color) { m_borderColor.bottom = color; }
-    void setBorderColorLeft(const Color& color) { m_borderColor.left = color; }
+    void setBorderColorTop(const Color& color) { m_borderColor.top = color; repaint(); }
+    void setBorderColorRight(const Color& color) { m_borderColor.right = color; repaint(); }
+    void setBorderColorBottom(const Color& color) { m_borderColor.bottom = color; repaint(); }
+    void setBorderColorLeft(const Color& color) { m_borderColor.left = color; repaint(); }
     void setMargin(int margin) { m_margin.set(margin); updateParentLayout(); }
     void setMarginHorizontal(int margin) { m_margin.right = m_margin.left = margin; updateParentLayout(); }
     void setMarginVertical(int margin) { m_margin.bottom = m_margin.top = margin; updateParentLayout(); }
@@ -345,8 +354,8 @@ public:
     void setPaddingRight(int padding) { m_padding.right = padding; updateLayout(); }
     void setPaddingBottom(int padding) { m_padding.bottom = padding; updateLayout(); }
     void setPaddingLeft(int padding) { m_padding.left = padding; updateLayout(); }
-    void setOpacity(float opacity) { m_opacity = std::clamp<float>(opacity, 0.0f, 1.0f); }
-    void setRotation(float degrees) { m_rotation = degrees; }
+    void setOpacity(float opacity) { m_opacity = std::clamp<float>(opacity, 0.0f, 1.0f); repaint(); }
+    void setRotation(float degrees) { m_rotation = degrees; repaint(); }
 
     int getX() { return m_rect.x(); }
     int getY() { return m_rect.y(); }
